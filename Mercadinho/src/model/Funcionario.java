@@ -11,8 +11,17 @@ public class Funcionario {
 	private String genero;
 	private String cargo;
 	private String nivel;
+	private String senha;
+	
+	
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 	public Funcionario(String idFuncionario, String nomeFuncionario, String cpfFuncionario, String dataNasc,
-			String telefone, String email, String endereco, String genero, String cargo, String nivel) {
+			String telefone, String email, String endereco, String genero, String cargo, String nivel,String senha) {
 		super();
 		this.idFuncionario = idFuncionario;
 		this.nomeFuncionario = nomeFuncionario;
@@ -24,6 +33,7 @@ public class Funcionario {
 		this.genero = genero;
 		this.cargo = cargo;
 		this.nivel = nivel;
+		this.senha = senha;
 	}
 	public Funcionario() {
 		super();

@@ -7,6 +7,14 @@ public class VendaProduto {
 	private String precoUn;
 	private String quantidade;
 	private String precoTotal;
+	private String tipoUn;
+	
+	public String getTipoUn() {
+		return tipoUn;
+	}
+	public void setTipoUn(String tipoUn) {
+		this.tipoUn = tipoUn;
+	}
 	public VendaProduto(String idVendaProduto, String idVenda, String idProduto, String precoUn, String quantidade,
 			String precoTotal) {
 		super();

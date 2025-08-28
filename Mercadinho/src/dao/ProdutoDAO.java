@@ -38,14 +38,15 @@ public class ProdutoDAO {
 
 		try {
 			stmt = con.prepareStatement("UPDATE Produto SET nomeProduto = ?, codBarra = ?,"
-					+"tipoUn = ?,precoUn = ?,dataFab = ?,dataVal = ?"+"where codBarra = ?");
+					+"tipoUn = ?,precoUn = ?,estoque = ?,dataFab = ?,dataVal = ?"+"where codBarra = ?");
 			stmt.setString(1, produto.getNomeProduto());
 			stmt.setString(2, produto.getCodBarra());
 			stmt.setString(3, produto.getTipoUn());
 			stmt.setString(4, produto.getPrecoUn());
-			stmt.setString(5, produto.getDataFab());
-			stmt.setString(6, produto.getDataVal());
-			stmt.setString(7, produto.getCodBarra());
+			stmt.setString(5, produto.getEstoque());
+			stmt.setString(6, produto.getDataFab());
+			stmt.setString(7, produto.getDataVal());
+			stmt.setString(8, produto.getCodBarra());
 			stmt.execute();
 			System.out.println("Produto cadastrado");
 		} catch (SQLException e) {
@@ -88,6 +89,7 @@ public class ProdutoDAO {
 				produto.setCodBarra(rs.getString("codBarra"));
 				produto.setTipoUn(rs.getString("tipoUn"));
 				produto.setPrecoUn(rs.getString("precoUn"));
+				produto.setEstoque(rs.getString("estoque"));
 				produto.setDataFab(rs.getString("dataFab"));
 				produto.setDataVal(rs.getString("dataVal"));
 			
@@ -119,6 +121,7 @@ public class ProdutoDAO {
 				produto.setCodBarra(rs.getString("codBarra"));
 				produto.setTipoUn(rs.getString("tipoUn"));
 				produto.setPrecoUn(rs.getString("precoUn"));
+				produto.setEstoque(rs.getString("estoque"));
 				produto.setDataFab(rs.getString("dataFab"));
 				produto.setDataVal(rs.getString("dataVal"));
               	produtos.add(produto);
@@ -127,6 +130,58 @@ public class ProdutoDAO {
 			throw new RuntimeException("Erro ao cadastrar!",e);
 		}finally {
 			ConnectionDatabase.closeConnection(con, stmt, rs);
+		}		
+		return produtos;
+	}
+	public ArrayList<Produto> readProdAV(){
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Produto> produtos = new ArrayList();
+		try {
+			stmt = con.prepareStatement("SELECT * FROM VW_ProdutoAVencer");
+			rs = stmt.executeQuery();
+              int i =1;
+			while(rs.next()){
+				Produto produto = new Produto();
+				produto.setIdProduto(""+i);
+				produto.setNomeProduto(rs.getString("nomeProduto"));
+				produto.setCodBarra(rs.getString("codBarra"));
+				produto.setTipoUn(rs.getString("tipoUn"));
+				produto.setDataVal(rs.getString("dataVal"));
+				produtos.add(produto);
+				i++;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao cadastrar!",e);
+		}finally {
+			ConnectionDatabase.closeConnection(con, stmt, rs);
+		}		
+		return produtos;
+	}
+	public ArrayList<Produto> readProdEB(){
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Produto> produtos = new ArrayList();
+		try {
+			stmt = con.prepareStatement("SELECT * FROM VW_EstoqueBaixo");
+			rs = stmt.executeQuery();
+              int i =1;
+			while(rs.next()){
+				Produto produto = new Produto();
+				produto.setIdProduto(""+i);
+				produto.setNomeProduto(rs.getString("nomeProduto"));
+				produto.setCodBarra(rs.getString("codBarra"));
+				produto.setTipoUn(rs.getString("tipoUn"));
+				produto.setEstoque(rs.getString("estoque"));
+				produtos.add(produto);
+				i++;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao cadastrar!",e);
+		}finally {
+			ConnectionDatabase.closeConnection(con,stmt, rs);
 		}		
 		return produtos;
 	}

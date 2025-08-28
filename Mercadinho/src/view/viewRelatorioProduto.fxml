@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.controllerRelatorioProdutos">
+   <children>
+      <Pane layoutX="-4.0" layoutY="-3.0" prefHeight="758.0" prefWidth="349.0" style="-fx-background-color: #708090;">
+         <children>
+            <Button fx:id="btClientes" layoutX="104.0" layoutY="395.0" mnemonicParsing="false" onAction="#actionClientes" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: #000000;" text="CLIENTES" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="btSair" layoutX="105.0" layoutY="622.0" mnemonicParsing="false" onAction="#actionSair" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #000000;" text="Sair" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="btRegistrarVenda" layoutX="101.0" layoutY="304.0" mnemonicParsing="false" onAction="#actionRegistrarVenda" style="-fx-background-color: #000000;" text="REGISTRAR VENDA" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="btMenuPrincipal" layoutX="103.0" layoutY="350.0" mnemonicParsing="false" onAction="#actionMenuPrincipal" style="-fx-background-color: #000000;" text="MENU PRINCIPAL" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="btProdutos" layoutX="103.0" layoutY="443.0" mnemonicParsing="false" onAction="#actionProdutos" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: #000000;" text="PRODUTOS" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="btFuncionario" layoutX="104.0" layoutY="490.0" mnemonicParsing="false" onAction="#actionFuncionario" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #000000;" text="FUNCIONARIOS" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="btVendas" layoutX="105.0" layoutY="537.0" mnemonicParsing="false" onAction="#actionVendas" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #000000;" text="VENDAS" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="258.0" fitWidth="332.0" layoutX="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/Frame.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Line endX="547.7332763671875" layoutX="480.0" layoutY="79.0" startX="-134.39999389648438" />
+      <Text layoutX="351.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RELATÓRIO DE PRODUTOS" wrappingWidth="338.5666503906249">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtPesquisar" layoutX="360.0" layoutY="93.0" prefHeight="26.0" prefWidth="412.0" />
+      <Button fx:id="btPesquisar" layoutX="790.0" layoutY="92.0" mnemonicParsing="false" onAction="#actionPesquisar" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: #FFA500;" text="PESQUISAR" />
+      <Button fx:id="btCadastrar" layoutX="907.0" layoutY="92.0" mnemonicParsing="false" onAction="#actionCadastrar" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: #00FF00;" text="CADASTRAR" />
+      <Button fx:id="btEditar" layoutX="790.0" layoutY="127.0" mnemonicParsing="false" onAction="#actionEditar" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: #FFFF00;" text="EDITAR" />
+      <Button fx:id="btExcluir" layoutX="907.0" layoutY="127.0" mnemonicParsing="false" onAction="#actionExcluir" prefHeight="26.0" prefWidth="105.0" style="-fx-background-color: #FF0000;" text="EXCLUIR" />
+      <TableView fx:id="tableProdutos" layoutX="362.0" layoutY="165.0" prefHeight="567.0" prefWidth="652.0">
+        <columns>
+          <TableColumn fx:id="columnId" prefWidth="27.199951171875" />
+          <TableColumn fx:id="columnNome" prefWidth="98.666748046875" text="Nome" />
+            <TableColumn fx:id="columnCodBarra" prefWidth="87.73345947265625" text="Cod Barra" />
+            <TableColumn fx:id="columnTipoUn" prefWidth="104.53338623046875" text="Tipo Un" />
+            <TableColumn fx:id="columnPrecoUn" prefWidth="69.8665771484375" text="Preco Un" />
+            <TableColumn fx:id="columnEstoque" prefWidth="82.4000244140625" text="Estoque" />
+            <TableColumn fx:id="columnDataFab" prefWidth="118.66668701171875" text="Data Fab" />
+            <TableColumn fx:id="columnDataVal" prefWidth="65.33331298828125" text="Data Val" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="52.0" fitWidth="45.0" layoutX="1024.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/logo.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="txtUser" layoutX="1033.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USER" />
+   </children>
+</AnchorPane>

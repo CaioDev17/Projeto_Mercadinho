@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="640.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.controllerCadastroVenda">
+   <children>
+      <Pane prefHeight="647.0" prefWidth="980.0" style="-fx-background-color: #708090;">
+         <children>
+            <Line endX="524.6000366210938" endY="7.62939453125E-6" layoutX="272.0" layoutY="166.0" startX="-100.0" />
+            <Text layoutX="336.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CADASTRO DE VENDA" wrappingWidth="285.98687744140625">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtNome" layoutX="161.0" layoutY="193.0" onKeyPressed="#actionCPFType" onKeyTyped="#actionCPFType" onMouseClicked="#actionCPFClick" prefHeight="25.0" prefWidth="347.0" />
+            <TextField fx:id="txtCpf" layoutX="580.0" layoutY="193.0" prefHeight="25.0" prefWidth="121.0" />
+            <TextField fx:id="txtPrecoUn" layoutX="160.0" layoutY="239.0" prefHeight="25.0" prefWidth="84.0" />
+            <Text layoutX="163.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOME" />
+            <Text layoutX="162.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço Unitário" />
+            <Text layoutX="501.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <TextField fx:id="txtDesconto" layoutX="159.0" layoutY="284.0" prefHeight="25.0" prefWidth="84.0" />
+            <Text layoutX="159.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desconto" />
+            <Button fx:id="btSalvar" layoutX="401.0" layoutY="505.0" mnemonicParsing="false" onAction="#actionSalvar" style="-fx-background-color: #00FF00;" text="SALVAR" />
+            <Button fx:id="btCancelar" layoutX="485.0" layoutY="505.0" mnemonicParsing="false" onAction="#actionCancelar" style="-fx-background-color: #FF0000;" text="CANCELAR" />
+            <Text layoutX="580.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF" />
+            <Text layoutX="262.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo Unitario" />
+            <ChoiceBox fx:id="txtTipoUn" layoutX="262.0" layoutY="284.0" prefHeight="25.0" prefWidth="75.0" />
+            <TextField fx:id="txtQtd" layoutX="356.0" layoutY="239.0" onKeyPressed="#actionQuantidade" onKeyTyped="#actionQuantidade" />
+            <Text layoutX="354.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantidade" />
+            <ChoiceBox fx:id="txtPagamento" layoutX="262.0" layoutY="239.0" prefHeight="25.0" prefWidth="69.0" />
+            <Text layoutX="255.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forma de PGTO" />
+            <Text layoutX="580.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vendedor" />
+            <TextField fx:id="txtVendedor" layoutX="580.0" layoutY="239.0" prefHeight="25.0" prefWidth="84.0" />
+            <TableView fx:id="tableVenda" layoutX="159.0" layoutY="324.0" prefHeight="147.0" prefWidth="356.0">
+              <columns>
+                <TableColumn fx:id="columnId" prefWidth="18.4000244140625" />
+                <TableColumn fx:id="columnNomePdt" prefWidth="67.199951171875" text="Nome Pdt" />
+                  <TableColumn fx:id="columnPrecoUn" prefWidth="67.199951171875" text="PrecoUn" />
+                  <TableColumn fx:id="columnTipoUn" prefWidth="67.199951171875" text="TipoUn" />
+                  <TableColumn fx:id="columnQtd" prefWidth="67.199951171875" text="Qtd" />
+                  <TableColumn fx:id="columnPrecoTtl" prefWidth="67.199951171875" text="Preco Ttl" />
+              </columns>
+            </TableView>
+            <TextField fx:id="txtTotalCompra" layoutX="558.0" layoutY="387.0" prefHeight="83.0" prefWidth="149.0" promptText="R$ 0,00">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+            <Text layoutX="577.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL DA COMPRA:" wrappingWidth="121.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Button fx:id="btAdicionar" layoutX="577.0" layoutY="284.0" mnemonicParsing="false" onAction="#actionAdicionar" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #FFA500;" text="ADICIONAR" />
+            <TextField fx:id="txtProduto" layoutX="351.0" layoutY="284.0" onKeyPressed="#actionProdutoType" onKeyTyped="#actionProdutoType" onMouseClicked="#actionProdutoClick" prefHeight="25.0" prefWidth="157.0" />
+            <Text layoutX="354.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produto" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -15,7 +15,7 @@ public class FuncionarioDAO {
 		Connection con = ConnectionDatabase.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = con.prepareStatement("INSERT INTO Cliente values(?,?,?,?,?,?,?)");
+			stmt = con.prepareStatement("INSERT INTO Cliente values(?,?,?,?,?,?,?,?,?,?)");
 			stmt.setString(1, funcionario.getNomeFuncionario());
 			stmt.setString(2, funcionario.getCpfFuncionario());
 			stmt.setString(3, funcionario.getDataNasc());
@@ -23,6 +23,9 @@ public class FuncionarioDAO {
 			stmt.setString(5, funcionario.getEmail());
 			stmt.setString(6, funcionario.getEndereco());
 			stmt.setString(7, funcionario.getGenero());
+			stmt.setString(8, funcionario.getCargo());
+			stmt.setString(9, funcionario.getNivel());
+			stmt.setString(10, funcionario.getSenha());
 			stmt.execute();
 			System.out.println("Funcionario cadastrado");
 		} catch (SQLException e) {
@@ -40,7 +43,7 @@ public class FuncionarioDAO {
 
 		try {
 			stmt = con.prepareStatement("UPDATE Funcionario SET nomeFuncionario = ?, cpfFuncionario = ?,"
-					+"dataNasc = ?,telefone = ?,email = ?,endereco = ?,genero = ?"+"where cpfCliente = ?");
+					+"dataNasc = ?,telefone = ?,email = ?,endereco = ?,genero = ?, cargo = ?,nivel = ?,senha = ?"+"where cpfCliente = ?");
 			stmt.setString(1, funcionario.getNomeFuncionario());
 			stmt.setString(2, funcionario.getCpfFuncionario());
 			stmt.setString(3, funcionario.getDataNasc());
@@ -48,7 +51,11 @@ public class FuncionarioDAO {
 			stmt.setString(5, funcionario.getEmail());
 			stmt.setString(6, funcionario.getEndereco());
 			stmt.setString(7, funcionario.getGenero());
-			stmt.setString(8, funcionario.getCpfFuncionario());
+			stmt.setString(8, funcionario.getCargo());
+			stmt.setString(9, funcionario.getNivel());
+			stmt.setString(10, funcionario.getSenha());
+			stmt.setString(11, funcionario.getCpfFuncionario());
+			
 			stmt.execute();
 			System.out.println("Funcionario cadastrado");
 		} catch (SQLException e) {
@@ -95,6 +102,7 @@ public class FuncionarioDAO {
 				funcionario.setEndereco(rs.getString("endereco"));
 				funcionario.setGenero(rs.getString("genero"));
 				funcionario.setNivel(rs.getString("nivel"));
+				funcionario.setSenha(rs.getString("senha"));
 				funcionarios.add(funcionario);
 			}
 		} catch (SQLException e) {
@@ -125,6 +133,7 @@ public class FuncionarioDAO {
 				funcionario.setEmail(rs.getString("email"));
 				funcionario.setEndereco(rs.getString("endereco"));
 				funcionario.setGenero(rs.getString("genero"));
+				funcionario.setSenha(rs.getString("senha"));
 				funcionarios.add(funcionario);
 			}
 		} catch (SQLException e) {
@@ -133,5 +142,60 @@ public class FuncionarioDAO {
 			ConnectionDatabase.closeConnection(con, stmt, rs);
 		}		
 		return funcionarios;
+	}
+	public Funcionario autenticarUser(String user, String password){
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Funcionario funcionario = new Funcionario();
+		try {
+			stmt = con.prepareStatement("SELECT * FROM Funcionario where cpfFuncionario = ? and senha = ?");
+			stmt.setString(1, user);
+			stmt.setString(2,password);
+			rs = stmt.executeQuery();
+
+			while(rs.next()){
+				
+				funcionario.setIdFuncionario(rs.getString("idFuncionario"));
+				funcionario.setNomeFuncionario(rs.getString("nomeFuncionario"));
+				funcionario.setCpfFuncionario(rs.getString("cpfFuncionario"));
+				funcionario.setDataNasc(rs.getString("dataNasc"));
+				funcionario.setTelefone(rs.getString("telefone"));
+				funcionario.setEmail(rs.getString("email"));
+				funcionario.setEndereco(rs.getString("endereco"));
+				funcionario.setGenero(rs.getString("genero"));
+				funcionario.setSenha(rs.getString("senha"));
+				
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao cadastrar!",e);
+		}finally {
+			ConnectionDatabase.closeConnection(con, stmt, rs);
+		}		
+		return funcionario;
+	}
+	public String readTotalVendido(String cpf){
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String TotalVendido = null;
+		ArrayList<Funcionario> funcionarios = new ArrayList();
+		try {
+			stmt = con.prepareStatement("select f.nomeFuncionario, SUM(valorTotal) as totalVendido from Funcionario f"
+					+ ", Venda v where f.idFuncionario = v.idFuncionario and cpfFuncionario = ?"
+					+ " group by f.nomeFuncionario");
+			stmt.setString(1, cpf);
+					 
+			rs = stmt.executeQuery();
+
+			while(rs.next()){
+	        TotalVendido = rs.getString("totalVendido");
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao cadastrar!",e);
+		}finally {
+			ConnectionDatabase.closeConnection(con, stmt, rs);
+		}		
+		return TotalVendido;
 	}
 }

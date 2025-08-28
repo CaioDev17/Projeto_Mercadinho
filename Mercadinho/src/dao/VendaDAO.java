@@ -16,12 +16,11 @@ public class VendaDAO {
 		Connection con = ConnectionDatabase.getConnection();
 		PreparedStatement stmt = null;
 		try {
-			stmt = con.prepareStatement("INSERT INTO Venda values(?,?,?,?,?)");
+			stmt = con.prepareStatement("INSERT INTO Venda values(?,?,?,?,GETDATE())");
 			stmt.setString(1, venda.getIdCliente());
 			stmt.setString(2, venda.getIdFuncionario());
 			stmt.setString(3, venda.getValorTotal());
 			stmt.setString(4, venda.getQuantTotal());
-			stmt.setString(5, venda.getDataVenda());
 			stmt.execute();
 			System.out.println("Venda cadastrado");
 		} catch (SQLException e) {
@@ -98,6 +97,34 @@ public class VendaDAO {
 		try {
 			stmt = con.prepareStatement("SELECT * FROM Venda where idVenda like ?");
 			stmt.setString(1,"%"+pesquisa+"%");
+			rs = stmt.executeQuery();
+
+			while(rs.next()){
+				Venda venda = new Venda();
+				venda.setIdVenda(rs.getString("idVenda"));
+				venda.setIdCliente(rs.getString("idCliente"));
+				venda.setIdFuncionario(rs.getString("idFuncionario"));
+				venda.setValorTotal(rs.getString("valorTotal"));
+				venda.setQuantTotal(rs.getString("quantTotal"));
+				venda.setDataVenda(rs.getString("dataVenda"));
+				
+				vendas.add(venda);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao procurar!",e);
+		}finally {
+			ConnectionDatabase.closeConnection(con, stmt, rs);
+		}		
+		return vendas;
+	}
+	public ArrayList<Venda> readLastId(){
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Venda> vendas = new ArrayList();
+		try {
+			stmt = con.prepareStatement("SELECT * FROM Venda order by IdVenda desc");
+			
 			rs = stmt.executeQuery();
 
 			while(rs.next()){
